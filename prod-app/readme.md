@@ -86,6 +86,22 @@ https://mlab.com/user?username=gildata
 > set the request's mode to 'no-cors'
 
 
+# URL test:
+
+https://api.mlab.com/api/1/databases/gildata_crm/collections/test?q={%22id%22:%201}&apiKey=YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G
+
+https://api.mlab.com/api/1/databases/gildata_crm/collections/test?f={%22datas%22:%201}&apiKey=YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G
+
+
+> { "message" : "Please provide a valid API key."}
+
+# Data API accessEnabled
+
+> Enabled Data API access
+
+
+# SyntaxError: Unexpected end of input at fetch.then
+
 
 
 ```js
@@ -176,18 +192,24 @@ API Authentication
 
 http://docs.mlab.com/data-api/#authentication
 
+
 */
 
+
 const myAPIKey = `YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G`;
-const url = `https://api.mlab.com/api/1/databases/gildata_crm/collections/test?q={"id": 1}&apiKey=${myAPIKey}`;
-// collection === datas
+const url = `https://api.mlab.com/api/1/databases/gildata_crm/collections/test?q={}&apiKey=${myAPIKey}`;
+// collection === test
+// q={} === all
 
 const getdata = () => {
     fetch(url, {
         method: 'GET',
         mode: 'no-cors'
     }).then(
-        (response) => response.json()
+        (response) => {
+            console.log(`fetch response`, response);
+            return response.json();
+        }
     ).then(
         (json) => {
             console.log(`fetch json`, json);
@@ -207,7 +229,54 @@ const getdata = () => {
     );
 };
 
+/*
+
+https://api.mlab.com/api/1/databases/gildata_crm/collections/test?q={}&apiKey=YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G
+
+// query all documents
+
+
+const myAPIKey = `YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G`;
+const url = `https://api.mlab.com/api/1/databases/gildata_crm/collections/test?f={"name":"xgqfrms"}&apiKey=${myAPIKey}`;
+
+// OK
+https://api.mlab.com/api/1/databases/gildata_crm/collections/test?f={"name":"xgqfrms"}&apiKey=YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G
+
+https://api.mlab.com/api/1/databases/gildata_crm/collections/test?f={%22name%22:%22xgqfrms%22}&apiKey=YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G
+
+
+const myAPIKey = `YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G`;
+const url = `https://api.mlab.com/api/1/databases/gildata_crm/collections/test?f={"datas": 1}&apiKey=${myAPIKey}`;
+
+
+https://api.mlab.com/api/1/databases/gildata_crm/collections/test?f={%22datas%22:%201}&apiKey=YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G
+
+
+
+[ 
+    { 
+        "_id" : { 
+            "$oid" : "5982c846f36d2839ce8c6c15"
+        } , 
+        "datas" : [ 
+            { "id" : 1 , "name" : "typicode" , "password" : "abc123"} , 
+            { "id" : 2 , "name" : "xgqfrms" , "password" : "xyz123"} , 
+            { "id" : 3 , "name" : "gildata" , "password" : "ufo123"}
+        ]
+    } , 
+    { 
+        "_id" : {
+            "$oid" : "5982cf86f36d2839ce8c7023"
+        }
+    } 
+]
+
+*/
+
+
 ```
+
+
 
 # MongoDB CURD
 
