@@ -33,7 +33,7 @@ https://mlab.com/home
 
 
 ```
-https://mlab.com/databases/gildata_crm/collections/datas
+https://mlab.com/databases/gildata_crm/collections/test
 
 https://mlab.com/databases/gildata_crm#users
 
@@ -46,20 +46,185 @@ https://mlab.com/databases/gildata_crm#users
 
 > mongod version: 3.2.14 (MMAPv1)
 
-mongodb://<dbuser>:<dbpassword>@ds139480.mlab.com:39480/gildata_crm
+`mongodb://<dbuser>:<dbpassword>@ds139480.mlab.com:39480/gildata_crm`
 
+http://docs.mlab.com/connecting/#connect-string
+
+
+# mLab Data API
+
+http://docs.mlab.com/data-api/
+
+https://api.mlab.com/api/1/databases?apiKey=2E81PUmPFI84t7UIc_5YdldAp1ruUPKye
+
+https://api.mlab.com/api/1/databases?apiKey=myAPIKey
+
+https://api.mlab.com/api/1/databases/my-db/collections?apiKey=myAPIKey
+
+
+https://api.mlab.com/api/1/databases/my-db/collections/my-coll?apiKey=myAPIKey
+
+## Optional parameters
+
+`[q=<query>][&c=true][&f=<fields>][&fo=true][&s=<order>][&sk=<skip>][&l=<limit>]`
+
+## API Authentication
+
+http://docs.mlab.com/data-api/#authentication
+
+https://mlab.com/user?username=gildata
+
+> username (not the account name)
 
 # mongo shell:
 
-% mongo ds139480.mlab.com:39480/gildata_crm -u <dbuser> -p <dbpassword>
+`% mongo ds139480.mlab.com:39480/gildata_crm -u <dbuser> -p <dbpassword>`
+
+
+# Access-Control-Allow-Origin
+
+> set the request's mode to 'no-cors'
+
+
+
+
+```js
+
+
+/*
+
+mongodb://<dbuser>:<dbpassword>@ds139480.mlab.com:39480/gildata_crm
+
+mongodb://user:pwd1234@ds139480.mlab.com:39480/gildata_crm
+
+> mongodb://user:pwd1234@ds139480.mlab.com:39480/gildata_crm/test/datas
+
+
+http://docs.mlab.com/connecting/#connect-string
+
+http://docs.mlab.com/data-api/
+
+https://api.mlab.com/api/1/databases?apiKey=myAPIKey
+
+
+https://api.mlab.com/api/1/databases/my-db/collections?apiKey=myAPIKey
+
+https://api.mlab.com/api/1/databases/my-db/collections/my-coll?apiKey=myAPIKey
+
+
+// Optional parameters
+
+[q=<query>][&c=true][&f=<fields>][&fo=true][&s=<order>][&sk=<skip>][&l=<limit>]
+
+*/
+
+/*
+Database: gildata_crm
+
+Collections: test
+
+Documents: 
+
+{
+    "_id": {
+        "$oid": "5982c846f36d2839ce8c6c15"
+    },
+    "datas": [
+        {
+            "id": 1,
+            "name": "typicode",
+            "password": "abc123"
+        },
+        {
+            "id": 2,
+            "name": "xgqfrms",
+            "password": "xyz123"
+        },
+        {
+            "id": 3,
+            "name": "gildata",
+            "password": "ufo123"
+        }
+    ]
+}
+
+
+{
+    "_id": {
+        "$oid": "5982cf86f36d2839ce8c7023"
+    },
+    "users": [
+        {
+            "id": 1,
+            "name": "typicode",
+            "password": "abc123"
+        },
+        {
+            "id": 2,
+            "name": "xgqfrms",
+            "password": "xyz123"
+        },
+        {
+            "id": 3,
+            "name": "gildata",
+            "password": "ufo123"
+        }
+    ]
+}
+
+API Authentication
+
+http://docs.mlab.com/data-api/#authentication
+
+*/
+
+const myAPIKey = `YpeswCDPr9CvDfmeIuawnh-iD5-oH0_G`;
+const url = `https://api.mlab.com/api/1/databases/gildata_crm/collections/test?q={"id": 1}&apiKey=${myAPIKey}`;
+// collection === datas
+
+const getdata = () => {
+    fetch(url, {
+        method: 'GET',
+        mode: 'no-cors'
+    }).then(
+        (response) => response.json()
+    ).then(
+        (json) => {
+            console.log(`fetch json`, json);
+            let data = JSON.stringify(json);
+            return data;
+        }
+    ).catch(
+        (err) => {
+            const color = `
+                color: red;
+                background: rgba(125, 125, 125, 0.7);
+                font-size: 23px;
+            `;
+            console.log(`%c Whoops, An Error occurred!`, color, err);
+            throw new Error("Whoops, An Error occurred!", err);
+        }
+    );
+};
+
+```
+
+# MongoDB CURD
+
+> ???
 
 
 
 
 
 
+# CodeMirror
 
+> JavaScript Framework
 
+codes format
+
+https://mlab.com/databases/gildata_crm/collections/test?_id=_new&pageSize=10&pageNum=0&totalCount=1&
 
 
 

@@ -88,6 +88,7 @@
                         }
                     );
                     // regex format
+                    // CodeMirror js lib
                     document.querySelector(id).innerText = `loading...`;
                     // mock async
                     setTimeout(() => {
@@ -104,7 +105,7 @@
                     throw new Error("Whoops, An Error occurred!");
                 }
             );
-        }
+        };
         const btn_post = document.querySelector("#click_post");
         btn_post.addEventListener("click", () => {
             postdata();
